@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		133DC2A0277964100028EFC9 /* ImageMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC29F277964100028EFC9 /* ImageMachineTests.swift */; };
 		133DC2AA277964100028EFC9 /* ImageMachineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2A9277964100028EFC9 /* ImageMachineUITests.swift */; };
 		133DC2AC277964100028EFC9 /* ImageMachineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2AB277964100028EFC9 /* ImageMachineUITestsLaunchTests.swift */; };
+		133DC2BA277969D50028EFC9 /* PersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2B9277969D50028EFC9 /* PersistentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		133DC2A5277964100028EFC9 /* ImageMachineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageMachineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		133DC2A9277964100028EFC9 /* ImageMachineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMachineUITests.swift; sourceTree = "<group>"; };
 		133DC2AB277964100028EFC9 /* ImageMachineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMachineUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		133DC2B9277969D50028EFC9 /* PersistentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		133DC2842779640E0028EFC9 /* ImageMachine */ = {
 			isa = PBXGroup;
 			children = (
+				133DC2B8277969C10028EFC9 /* CoreData */,
 				133DC2852779640E0028EFC9 /* AppDelegate.swift */,
 				133DC2872779640E0028EFC9 /* SceneDelegate.swift */,
 				133DC2892779640E0028EFC9 /* ViewController.swift */,
@@ -108,7 +111,6 @@
 				133DC291277964100028EFC9 /* Assets.xcassets */,
 				133DC293277964100028EFC9 /* LaunchScreen.storyboard */,
 				133DC296277964100028EFC9 /* Info.plist */,
-				133DC28E2779640E0028EFC9 /* ImageMachine.xcdatamodeld */,
 			);
 			path = ImageMachine;
 			sourceTree = "<group>";
@@ -128,6 +130,15 @@
 				133DC2AB277964100028EFC9 /* ImageMachineUITestsLaunchTests.swift */,
 			);
 			path = ImageMachineUITests;
+			sourceTree = "<group>";
+		};
+		133DC2B8277969C10028EFC9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				133DC28E2779640E0028EFC9 /* ImageMachine.xcdatamodeld */,
+				133DC2B9277969D50028EFC9 /* PersistentManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +221,7 @@
 				};
 			};
 			buildConfigurationList = 133DC27D2779640E0028EFC9 /* Build configuration list for PBXProject "ImageMachine" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -262,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				133DC28A2779640E0028EFC9 /* ViewController.swift in Sources */,
+				133DC2BA277969D50028EFC9 /* PersistentManager.swift in Sources */,
 				133DC2902779640E0028EFC9 /* ImageMachine.xcdatamodeld in Sources */,
 				133DC2862779640E0028EFC9 /* AppDelegate.swift in Sources */,
 				133DC2882779640E0028EFC9 /* SceneDelegate.swift in Sources */,
@@ -371,7 +383,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -426,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -449,6 +461,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -477,6 +490,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
