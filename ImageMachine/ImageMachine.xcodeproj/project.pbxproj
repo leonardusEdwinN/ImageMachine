@@ -21,6 +21,8 @@
 		133DC2C3277989AC0028EFC9 /* AddEditData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133DC2C2277989AC0028EFC9 /* AddEditData.storyboard */; };
 		133DC2C5277989BC0028EFC9 /* AddEditDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2C4277989BC0028EFC9 /* AddEditDataViewController.swift */; };
 		133DC2C7277989E20028EFC9 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2C6277989E20028EFC9 /* PresentationController.swift */; };
+		133DC2CB2779A22E0028EFC9 /* ListMachineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133DC2C92779A22E0028EFC9 /* ListMachineTableViewCell.swift */; };
+		133DC2CC2779A22E0028EFC9 /* ListMachineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DC2CA2779A22E0028EFC9 /* ListMachineTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		133DC2C2277989AC0028EFC9 /* AddEditData.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEditData.storyboard; sourceTree = "<group>"; };
 		133DC2C4277989BC0028EFC9 /* AddEditDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditDataViewController.swift; sourceTree = "<group>"; };
 		133DC2C6277989E20028EFC9 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		133DC2C92779A22E0028EFC9 /* ListMachineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMachineTableViewCell.swift; sourceTree = "<group>"; };
+		133DC2CA2779A22E0028EFC9 /* ListMachineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListMachineTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 		133DC2BC2779745E0028EFC9 /* ListMachine */ = {
 			isa = PBXGroup;
 			children = (
+				133DC2C82779A2190028EFC9 /* CustomCell */,
 				133DC2BD277974710028EFC9 /* ListMachineViewController.swift */,
 				133DC2BF2779752D0028EFC9 /* ListMachine.storyboard */,
 			);
@@ -172,6 +177,15 @@
 				133DC2C6277989E20028EFC9 /* PresentationController.swift */,
 			);
 			path = AddEditData;
+			sourceTree = "<group>";
+		};
+		133DC2C82779A2190028EFC9 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				133DC2C92779A22E0028EFC9 /* ListMachineTableViewCell.swift */,
+				133DC2CA2779A22E0028EFC9 /* ListMachineTableViewCell.xib */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +294,7 @@
 			files = (
 				133DC295277964100028EFC9 /* LaunchScreen.storyboard in Resources */,
 				133DC292277964100028EFC9 /* Assets.xcassets in Resources */,
+				133DC2CC2779A22E0028EFC9 /* ListMachineTableViewCell.xib in Resources */,
 				133DC2C3277989AC0028EFC9 /* AddEditData.storyboard in Resources */,
 				133DC2C02779752D0028EFC9 /* ListMachine.storyboard in Resources */,
 			);
@@ -311,6 +326,7 @@
 				133DC2C7277989E20028EFC9 /* PresentationController.swift in Sources */,
 				133DC2902779640E0028EFC9 /* ImageMachine.xcdatamodeld in Sources */,
 				133DC2862779640E0028EFC9 /* AppDelegate.swift in Sources */,
+				133DC2CB2779A22E0028EFC9 /* ListMachineTableViewCell.swift in Sources */,
 				133DC2C5277989BC0028EFC9 /* AddEditDataViewController.swift in Sources */,
 				133DC2882779640E0028EFC9 /* SceneDelegate.swift in Sources */,
 			);

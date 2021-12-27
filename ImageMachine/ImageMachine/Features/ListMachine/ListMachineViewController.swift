@@ -13,13 +13,63 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
     
     private var imagePickerControler =  UIImagePickerController()
     
+    // MARK: UI Component
+    @IBOutlet weak var labelTitle: UILabel!
     @IBAction func sortButtonPressed(_ sender: Any) {
+        
+    }
+    @IBAction func moreButtonPressed(_ sender: Any) {
         PresentActionSheet()
     }
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var listMachinveTableView: UITableView!
+    @IBOutlet weak var navigationView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerCell()
+        setUINavigation()
+        setTitleButton()
     }
+    
+    func registerCell(){
+        
+        listMachinveTableView.register(UINib.init(nibName: "ListMachineTableViewCell", bundle: nil), forCellReuseIdentifier: "listMachineTableViewCell")
+        
+        listMachinveTableView.delegate = self
+        listMachinveTableView.dataSource = self
+        
+    }
+    
+    func setTitleButton(){
+        sortButton.setTitle("", for: .normal)
+        moreButton.setTitle("", for: .normal)
+    }
+    
+    func setUINavigation(){
+        navigationView.backgroundColor = UIColor.white
+        navigationView.layer.shadowColor = UIColor.gray.cgColor
+        navigationView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        navigationView.layer.shadowRadius = 1
+        navigationView.layer.shadowOpacity = 5
+    }
+    
+}
+
+extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "listMachineTableViewCell", for: indexPath) as! ListMachineTableViewCell
+        
+        return cell
+    }
+    
+    
 }
 
 extension ListMachineViewController{

@@ -16,8 +16,22 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juT-bM-SBY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Mv1-Ud-gei"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="juT-bM-SBY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="KZj-of-ORT"/>
+                            <constraint firstItem="juT-bM-SBY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="PUz-x0-6lK"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="juT-bM-SBY" secondAttribute="trailing" id="Ueu-G8-c4l"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
