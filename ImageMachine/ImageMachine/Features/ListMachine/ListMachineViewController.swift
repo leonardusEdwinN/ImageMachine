@@ -16,10 +16,10 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
     // MARK: UI Component
     @IBOutlet weak var labelTitle: UILabel!
     @IBAction func sortButtonPressed(_ sender: Any) {
-        
+        PresentActionSheetSort()
     }
     @IBAction func moreButtonPressed(_ sender: Any) {
-        PresentActionSheet()
+        PresentActionSheetMore()
     }
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
@@ -82,9 +82,9 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension ListMachineViewController{
-    private func PresentActionSheet(){
+    private func PresentActionSheetMore(){
         
-        let actionSheet = UIAlertController(title: "Select Action", message: "Choose", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Select Action", message: "", preferredStyle: .actionSheet)
         actionSheet.view.tintColor = UIColor(named: "ActionSheetCustomColor")
         
         //button 1
@@ -103,7 +103,7 @@ extension ListMachineViewController{
         }
         
         //button camera
-        let cameraAction = UIAlertAction(title: "Camera", style: .default){ (action: UIAlertAction) in
+        let cameraAction = UIAlertAction(title: "Scan QR Code", style: .default){ (action: UIAlertAction) in
             self.performSegue(withIdentifier: "GoToQRScanner", sender: self)
 //            if UIImagePickerController.isSourceTypeAvailable(.camera){
 //                self.imagePickerControler.sourceType = .camera
@@ -122,6 +122,51 @@ extension ListMachineViewController{
         
         actionSheet.addAction(addDatamachine)
         actionSheet.addAction(cameraAction)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func PresentActionSheetSort(){
+        
+        let actionSheet = UIAlertController(title: "Sort By", message: "", preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = UIColor(named: "ActionSheetCustomColor")
+        
+        //button 1
+        let sortByMachineName = UIAlertAction(title: "Machine Name", style: .default){ (action: UIAlertAction) in
+            
+//            self.performSegue(withIdentifier: "GoToAddDataPage", sender: self)
+//            if UIImagePickerController.isSourceTypeAvailable(.camera){
+//                self.imagePickerControler.sourceType = .photoLibrary
+//                self.imagePickerControler.delegate = self
+//                self.imagePickerControler.allowsEditing = true
+//                self.present(self.imagePickerControler, animated: true, completion: nil)
+//                self.usingCamera = false
+//            }else{
+//                fatalError("Photo library not avaliable")
+//            }
+        }
+        
+        //button camera
+        let sortByMachineType = UIAlertAction(title: "Machine Type", style: .default){ (action: UIAlertAction) in
+//            self.performSegue(withIdentifier: "GoToQRScanner", sender: self)
+//            if UIImagePickerController.isSourceTypeAvailable(.camera){
+//                self.imagePickerControler.sourceType = .camera
+//                self.imagePickerControler.delegate = self
+//                self.imagePickerControler.allowsEditing = true
+//                self.present(self.imagePickerControler, animated: true, completion: nil)
+//            }
+//            else{
+////                Util.displayAlert(title: "Camera Not Available", message: "")
+//            }
+            
+        }
+        
+        //button 3
+        let cancel = UIAlertAction(title: "Cancel", style:.cancel, handler: nil)
+        
+        actionSheet.addAction(sortByMachineName)
+        actionSheet.addAction(sortByMachineType)
         actionSheet.addAction(cancel)
         
         present(actionSheet, animated: true, completion: nil)

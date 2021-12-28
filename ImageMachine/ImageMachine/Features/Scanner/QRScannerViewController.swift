@@ -11,6 +11,7 @@ import UIKit
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var backButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,13 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        
+        backButton = UIButton(frame: CGRect(x: 15, y: 30, width: 100, height: 40))
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        view.addSubview(backButton)
+        
+        
 
         captureSession.startRunning()
     }

@@ -25,6 +25,8 @@
 		133DC2CC2779A22E0028EFC9 /* ListMachineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DC2CA2779A22E0028EFC9 /* ListMachineTableViewCell.xib */; };
 		138FB26A277ACA10007BDF2A /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FB269277ACA10007BDF2A /* QRScannerViewController.swift */; };
 		138FB26C277ACA5E007BDF2A /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 138FB26B277ACA5E007BDF2A /* QRScanner.storyboard */; };
+		138FB270277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FB26E277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift */; };
+		138FB271277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		133DC2CA2779A22E0028EFC9 /* ListMachineTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListMachineTableViewCell.xib; sourceTree = "<group>"; };
 		138FB269277ACA10007BDF2A /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		138FB26B277ACA5E007BDF2A /* QRScanner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
+		138FB26E277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineImageThumbnailTableViewCell.swift; sourceTree = "<group>"; };
+		138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MachineImageThumbnailTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 		133DC2C12779898A0028EFC9 /* AddEditData */ = {
 			isa = PBXGroup;
 			children = (
+				138FB26D277AE3A1007BDF2A /* CustomCell */,
 				133DC2C2277989AC0028EFC9 /* AddEditData.storyboard */,
 				133DC2C4277989BC0028EFC9 /* AddEditDataViewController.swift */,
 				133DC2C6277989E20028EFC9 /* PresentationController.swift */,
@@ -200,6 +205,15 @@
 				138FB26B277ACA5E007BDF2A /* QRScanner.storyboard */,
 			);
 			path = Scanner;
+			sourceTree = "<group>";
+		};
+		138FB26D277AE3A1007BDF2A /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				138FB26E277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift */,
+				138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				138FB271277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib in Resources */,
 				133DC295277964100028EFC9 /* LaunchScreen.storyboard in Resources */,
 				133DC292277964100028EFC9 /* Assets.xcassets in Resources */,
 				133DC2CC2779A22E0028EFC9 /* ListMachineTableViewCell.xib in Resources */,
@@ -340,6 +355,7 @@
 				133DC2BA277969D50028EFC9 /* PersistentManager.swift in Sources */,
 				133DC2C7277989E20028EFC9 /* PresentationController.swift in Sources */,
 				133DC2902779640E0028EFC9 /* ImageMachine.xcdatamodeld in Sources */,
+				138FB270277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift in Sources */,
 				133DC2862779640E0028EFC9 /* AppDelegate.swift in Sources */,
 				138FB26A277ACA10007BDF2A /* QRScannerViewController.swift in Sources */,
 				133DC2CB2779A22E0028EFC9 /* ListMachineTableViewCell.swift in Sources */,
