@@ -56,6 +56,15 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
         navigationView.layer.shadowOpacity = 5
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToQRScanner"{
+            if let destVC = segue.destination as? QRScannerViewController {
+
+                destVC.modalPresentationStyle = .fullScreen
+            }
+        }
+    }
+    
 }
 
 extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
@@ -95,15 +104,16 @@ extension ListMachineViewController{
         
         //button camera
         let cameraAction = UIAlertAction(title: "Camera", style: .default){ (action: UIAlertAction) in
-            if UIImagePickerController.isSourceTypeAvailable(.camera){
-                self.imagePickerControler.sourceType = .camera
-                self.imagePickerControler.delegate = self
-                self.imagePickerControler.allowsEditing = true
-                self.present(self.imagePickerControler, animated: true, completion: nil)
-            }
-            else{
-//                Util.displayAlert(title: "Camera Not Available", message: "")
-            }
+            self.performSegue(withIdentifier: "GoToQRScanner", sender: self)
+//            if UIImagePickerController.isSourceTypeAvailable(.camera){
+//                self.imagePickerControler.sourceType = .camera
+//                self.imagePickerControler.delegate = self
+//                self.imagePickerControler.allowsEditing = true
+//                self.present(self.imagePickerControler, animated: true, completion: nil)
+//            }
+//            else{
+////                Util.displayAlert(title: "Camera Not Available", message: "")
+//            }
             
         }
         
