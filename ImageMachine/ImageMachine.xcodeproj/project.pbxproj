@@ -27,6 +27,8 @@
 		138FB26C277ACA5E007BDF2A /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 138FB26B277ACA5E007BDF2A /* QRScanner.storyboard */; };
 		138FB270277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FB26E277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift */; };
 		138FB271277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */; };
+		138FB274277AE612007BDF2A /* DetailMachine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 138FB273277AE612007BDF2A /* DetailMachine.storyboard */; };
+		138FB276277AE621007BDF2A /* DetailMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FB275277AE621007BDF2A /* DetailMachineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		138FB26B277ACA5E007BDF2A /* QRScanner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
 		138FB26E277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineImageThumbnailTableViewCell.swift; sourceTree = "<group>"; };
 		138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MachineImageThumbnailTableViewCell.xib; sourceTree = "<group>"; };
+		138FB273277AE612007BDF2A /* DetailMachine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailMachine.storyboard; sourceTree = "<group>"; };
+		138FB275277AE621007BDF2A /* DetailMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMachineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,7 @@
 		133DC2BB277974570028EFC9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				138FB272277AE5FC007BDF2A /* DetailMachine */,
 				138FB268277ACA00007BDF2A /* Scanner */,
 				133DC2C12779898A0028EFC9 /* AddEditData */,
 				133DC2BC2779745E0028EFC9 /* ListMachine */,
@@ -214,6 +219,15 @@
 				138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		138FB272277AE5FC007BDF2A /* DetailMachine */ = {
+			isa = PBXGroup;
+			children = (
+				138FB273277AE612007BDF2A /* DetailMachine.storyboard */,
+				138FB275277AE621007BDF2A /* DetailMachineViewController.swift */,
+			);
+			path = DetailMachine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +341,7 @@
 				133DC2C3277989AC0028EFC9 /* AddEditData.storyboard in Resources */,
 				138FB26C277ACA5E007BDF2A /* QRScanner.storyboard in Resources */,
 				133DC2C02779752D0028EFC9 /* ListMachine.storyboard in Resources */,
+				138FB274277AE612007BDF2A /* DetailMachine.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +374,7 @@
 				133DC2862779640E0028EFC9 /* AppDelegate.swift in Sources */,
 				138FB26A277ACA10007BDF2A /* QRScannerViewController.swift in Sources */,
 				133DC2CB2779A22E0028EFC9 /* ListMachineTableViewCell.swift in Sources */,
+				138FB276277AE621007BDF2A /* DetailMachineViewController.swift in Sources */,
 				133DC2C5277989BC0028EFC9 /* AddEditDataViewController.swift in Sources */,
 				133DC2882779640E0028EFC9 /* SceneDelegate.swift in Sources */,
 			);

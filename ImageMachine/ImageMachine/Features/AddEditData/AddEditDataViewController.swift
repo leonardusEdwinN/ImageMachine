@@ -37,6 +37,11 @@ class AddEditDataViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
+        setUI()
+    }
+    
+    func setUI(){
+        addMachineImageButton.setTitle("", for: .normal)
     }
     
     func registerCell(){

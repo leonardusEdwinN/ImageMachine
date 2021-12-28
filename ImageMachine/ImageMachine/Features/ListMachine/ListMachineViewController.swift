@@ -78,6 +78,60 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        // Delete Action action
+        let delete = UIContextualAction(style: .normal,
+                                         title: "Delete") { [weak self] (action, view, completionHandler) in
+
+//            if let deletedRemindner = self?.reminders[indexPath.row]{
+//                //update data status
+//                PersistanceManager.shared.deleteReminder(reminder: deletedRemindner)
+//            }
+
+            print("DELETE DATA UHUY")
+//            self?.fetchDataReminder()
+//
+//            self?.timerReminderTableView.reloadData()
+            completionHandler(true)
+        }
+        
+        delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
+        delete.backgroundColor = .red
+        
+        
+        let configuration = UISwipeActionsConfiguration(actions: [delete])
+
+        return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let edit = UIContextualAction(style: .normal,
+                                         title: "Edit") { [weak self] (action, view, completionHandler) in
+
+//            if let deletedRemindner = self?.reminders[indexPath.row]{
+//                //update data status
+//                PersistanceManager.shared.deleteReminder(reminder: deletedRemindner)
+//            }
+
+            print("Edit DATA UHUY")
+//            self?.fetchDataReminder()
+//
+//            self?.timerReminderTableView.reloadData()
+            completionHandler(true)
+        }
+        
+        edit.image = UIImage(systemName: "pencil")?.withTintColor(.white)
+        edit.backgroundColor = .green
+        
+        
+        
+        let configuration = UISwipeActionsConfiguration(actions: [edit])
+
+        return configuration
+    }
+    
     
 }
 
@@ -91,30 +145,11 @@ extension ListMachineViewController{
         let addDatamachine = UIAlertAction(title: "Add Data Machine", style: .default){ (action: UIAlertAction) in
             
             self.performSegue(withIdentifier: "GoToAddDataPage", sender: self)
-//            if UIImagePickerController.isSourceTypeAvailable(.camera){
-//                self.imagePickerControler.sourceType = .photoLibrary
-//                self.imagePickerControler.delegate = self
-//                self.imagePickerControler.allowsEditing = true
-//                self.present(self.imagePickerControler, animated: true, completion: nil)
-//                self.usingCamera = false
-//            }else{
-//                fatalError("Photo library not avaliable")
-//            }
         }
         
         //button camera
         let cameraAction = UIAlertAction(title: "Scan QR Code", style: .default){ (action: UIAlertAction) in
             self.performSegue(withIdentifier: "GoToQRScanner", sender: self)
-//            if UIImagePickerController.isSourceTypeAvailable(.camera){
-//                self.imagePickerControler.sourceType = .camera
-//                self.imagePickerControler.delegate = self
-//                self.imagePickerControler.allowsEditing = true
-//                self.present(self.imagePickerControler, animated: true, completion: nil)
-//            }
-//            else{
-////                Util.displayAlert(title: "Camera Not Available", message: "")
-//            }
-            
         }
         
         //button 3
@@ -134,32 +169,10 @@ extension ListMachineViewController{
         
         //button 1
         let sortByMachineName = UIAlertAction(title: "Machine Name", style: .default){ (action: UIAlertAction) in
-            
-//            self.performSegue(withIdentifier: "GoToAddDataPage", sender: self)
-//            if UIImagePickerController.isSourceTypeAvailable(.camera){
-//                self.imagePickerControler.sourceType = .photoLibrary
-//                self.imagePickerControler.delegate = self
-//                self.imagePickerControler.allowsEditing = true
-//                self.present(self.imagePickerControler, animated: true, completion: nil)
-//                self.usingCamera = false
-//            }else{
-//                fatalError("Photo library not avaliable")
-//            }
         }
         
         //button camera
         let sortByMachineType = UIAlertAction(title: "Machine Type", style: .default){ (action: UIAlertAction) in
-//            self.performSegue(withIdentifier: "GoToQRScanner", sender: self)
-//            if UIImagePickerController.isSourceTypeAvailable(.camera){
-//                self.imagePickerControler.sourceType = .camera
-//                self.imagePickerControler.delegate = self
-//                self.imagePickerControler.allowsEditing = true
-//                self.present(self.imagePickerControler, animated: true, completion: nil)
-//            }
-//            else{
-////                Util.displayAlert(title: "Camera Not Available", message: "")
-//            }
-            
         }
         
         //button 3

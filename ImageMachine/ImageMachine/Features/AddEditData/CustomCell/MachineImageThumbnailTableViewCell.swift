@@ -9,8 +9,12 @@ import UIKit
 
 class MachineImageThumbnailTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var machineImageDeleteButtonPressed: UIButton!
+    @IBOutlet weak var machineImageDeleteButton: UIButton!
+    @IBOutlet weak var machineImageName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        machineImageDeleteButton.setTitle("", for: .normal)
         // Initialization code
     }
 
