@@ -9,16 +9,24 @@ import Foundation
 import UIKit
 
 class DetailMachineViewController : UIViewController{
+    // MARK: UI Component Navigation
     @IBOutlet weak var navigationView: UIView!
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var titlePage: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBAction func editButtonPressed(_ sender: Any) {
+        print("EDIT ITEM")
     }
     
     @IBOutlet weak var trashButton: UIButton!
     @IBAction func trashButtonPressed(_ sender: Any) {
+        print("DELETE ITEM")
     }
-    @IBOutlet weak var titlePage: UILabel!
     
+    // MARK: UI Component Machine Information
     @IBOutlet weak var machineInformationLabel: UILabel!
     @IBOutlet weak var viewInformation: UIView!
     
@@ -34,6 +42,7 @@ class DetailMachineViewController : UIViewController{
     @IBOutlet weak var machineMaintainDateLabel: UILabel!
     @IBOutlet weak var machineMaintainDateValueLabel: UILabel!
     
+    // MARK: UI Component Machine Image Thumbnail
     @IBOutlet weak var machineImageThumbnail: UILabel!
     
     @IBOutlet weak var viewImageThumbnail: UIView!
@@ -71,6 +80,15 @@ class DetailMachineViewController : UIViewController{
     func setRoundedCorner(viewCorner: UIView){
         viewCorner.layer.cornerRadius = 15
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToImageFullscreen"{
+            if let destVC = segue.destination as? DetailMachineImageViewController {
+
+                destVC.modalPresentationStyle = .fullScreen
+            }
+        }
+    }
 }
 
 
@@ -83,6 +101,10 @@ extension DetailMachineViewController : UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageThumbnailCollectionViewCell", for: indexPath) as! ImageThumbnailCollectionViewCell
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "GoToImageFullscreen", sender: self)
     }
     
     

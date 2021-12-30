@@ -54,6 +54,9 @@
                                         <rect key="frame" x="15" y="9.5" width="73" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="chevron.left" catalog="system" title=" Back"/>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="x8Q-DT-gB3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -213,6 +216,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="XxH-Jo-6wN" id="pZ4-D5-XJq"/>
                         <outlet property="editButton" destination="HGW-V6-as9" id="sry-QW-ldF"/>
                         <outlet property="imageThumbnailCollectionView" destination="Cps-ha-aAP" id="qyR-5o-bTP"/>
                         <outlet property="machineIdLabel" destination="QjW-vV-77a" id="Gug-Of-bxR"/>
@@ -230,11 +234,22 @@
                         <outlet property="trashButton" destination="RkM-cQ-mWX" id="gWq-tm-Jh2"/>
                         <outlet property="viewImageThumbnail" destination="RYG-Ue-Lo2" id="jB6-e0-1RZ"/>
                         <outlet property="viewInformation" destination="qDj-ju-BfS" id="bi9-Nf-q0P"/>
+                        <segue destination="r25-RD-IC9" kind="show" identifier="GoToImageFullscreen" id="vlN-JB-Fbm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-25" y="116"/>
+        </scene>
+        <!--DetailMachineImageVC-->
+        <scene sceneID="DMB-b0-t5f">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailMachineImage" referencedIdentifier="DetailMachineImageVC" id="r25-RD-IC9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="B04-V8-OHL"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dG-vN-oh1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556" y="-50"/>
         </scene>
     </scenes>
     <resources>
