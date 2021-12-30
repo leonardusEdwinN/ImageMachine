@@ -28,6 +28,45 @@ class PersistanceManager {
         return context
     }
     
+    func setDataMachine(name: String, type:String, QRNumber: String, lastMaintain : Date) {
+        let machine = Machine(context: persistentContainer.viewContext)
+        machine.id = "\(UUID())"
+        machine.name = name
+        machine.type = type
+        machine.qrCodeNumber = QRNumber
+        machine.maintenanceDate = lastMaintain
+        save()
+    }
+    
+    func getListMachines() -> [Machine] {
+        let request: NSFetchRequest<Machine> = Machine.fetchRequest()
+        
+        var listMachines: [Machine] = []
+        
+        do {
+            listMachines = try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print("Error fetching authors")
+        }
+        
+        return listMachines
+    }
+    
+    
+//    func getImageOfMachineID(id: String) -> Machine {
+//        let request: NSFetchRequest<Machine> = Machine.fetchRequest()
+//
+//        var listMachines: [Machine] = []
+//
+//        do {
+//            listMachines = try persistentContainer.viewContext.fetch(request)
+//        } catch {
+//            print("Error fetching authors")
+//        }
+//
+//        return listMachines
+//    }
+    
     
     func save () {
         let context = persistentContainer.viewContext

@@ -87,6 +87,7 @@
                         <outlet property="sortButton" destination="L2F-GP-RY7" id="K0l-Ou-D47"/>
                         <segue destination="JQY-TC-eOC" kind="show" identifier="GoToAddDataPage" id="xRl-5u-4Oz"/>
                         <segue destination="Oe0-i2-DJ5" kind="show" identifier="GoToQRScanner" id="M1S-CF-3Bk"/>
+                        <segue destination="wRM-dK-GJH" kind="show" identifier="GoToDetail" id="htC-nF-BoY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -112,6 +113,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgJ-QR-Z5q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1714" y="-1"/>
+        </scene>
+        <!--DetailMachineVC-->
+        <scene sceneID="CzK-Ss-p3M">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DetailMachine" referencedIdentifier="DetailMachineVC" id="wRM-dK-GJH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Pd3-mG-XEF"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ikx-8K-rjE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1714" y="124"/>
         </scene>
     </scenes>
     <resources>

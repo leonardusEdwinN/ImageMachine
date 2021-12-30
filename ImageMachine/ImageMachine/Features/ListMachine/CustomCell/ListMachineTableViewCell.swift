@@ -9,8 +9,10 @@ import UIKit
 
 class ListMachineTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var machineNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        machineNameLabel.text = ""
         // Initialization code
     }
 
@@ -18,6 +20,10 @@ class ListMachineTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setUI(title : String){
+        machineNameLabel.text = title
     }
     
 }

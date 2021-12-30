@@ -26,6 +26,12 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var listMachinveTableView: UITableView!
     @IBOutlet weak var navigationView: UIView!
     
+    var listMachine : [Machine] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDataListMachine()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +46,15 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
         
         listMachinveTableView.delegate = self
         listMachinveTableView.dataSource = self
-        
     }
     
     func setTitleButton(){
         sortButton.setTitle("", for: .normal)
         moreButton.setTitle("", for: .normal)
+    }
+    
+    func getDataListMachine(){
+        listMachine = PersistanceManager.shared.getListMachines()
     }
     
     func setUINavigation(){
@@ -62,6 +71,10 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
 
                 destVC.modalPresentationStyle = .fullScreen
             }
+        }else if segue.identifier == "GoToDetail"{
+            if let destVC = segue.destination as? DetailMachineViewController {
+                
+            }
         }
     }
     
@@ -69,13 +82,21 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
 
 extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return listMachine.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "listMachineTableViewCell", for: indexPath) as! ListMachineTableViewCell
         
+        
+        
+        cell.setUI(title: listMachine[indexPath.row].name ?? "")
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "GoToDetail", sender: self)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
