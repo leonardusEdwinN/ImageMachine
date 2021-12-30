@@ -34,9 +34,15 @@ class AddEditDataViewController: UIViewController{
         print("ADD DATA")
     }
     
+    @IBOutlet weak var saveButton: UIButton!
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        print("SAVE DATA")
+        PersistanceManager.shared.setDataMachine(name: machineNameTextField.text ?? "", type: machineTypeTextField.text ?? "", QRNumber: machineQRNumberTextField.text ?? "1", lastMaintain: machineLastMaintainDatePicker.date)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
+        hideKeyboardWhenTappedAround()
         setUI()
     }
     
@@ -51,6 +57,16 @@ class AddEditDataViewController: UIViewController{
         machineImageThumbnailTableView.delegate = self
         machineImageThumbnailTableView.dataSource = self
         
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(AddEditDataViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

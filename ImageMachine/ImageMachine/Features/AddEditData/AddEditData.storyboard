@@ -49,9 +49,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="machineNameTextField:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="GM3-1O-LZk"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Machine Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yh-2h-NDs">
                                 <rect key="frame" x="15" y="195" width="384" height="21"/>
@@ -66,9 +63,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="machineTypeTextField:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="en0-4u-zfr"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QR number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSw-Fr-iqe">
                                 <rect key="frame" x="15" y="281" width="384" height="21"/>
@@ -117,6 +111,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1lL-bd-cpo"/>
+                                </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="zEg-eE-Anp">
                                 <rect key="frame" x="249" y="361" width="150" height="50"/>
@@ -124,9 +121,6 @@
                                     <constraint firstAttribute="height" constant="50" id="DJb-FO-tpe"/>
                                     <constraint firstAttribute="width" constant="150" id="zNQ-ld-45y"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="machineLastMaintainDatePicker:" destination="Y6W-OH-hqX" eventType="valueChanged" id="905-R0-YLy"/>
-                                </connections>
                             </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -179,13 +173,14 @@
                         <outlet property="machineImageThumbnailLabel" destination="zCY-cE-T3w" id="AaN-ia-U8J"/>
                         <outlet property="machineImageThumbnailTableView" destination="JK5-zw-jHI" id="8ZU-lE-gOT"/>
                         <outlet property="machineLastMaintainDateLabel" destination="ADo-qA-QMp" id="iUk-au-NwV"/>
-                        <outlet property="machineLastMaintainDatePicker" destination="zEg-eE-Anp" id="6n0-ah-Ff5"/>
+                        <outlet property="machineLastMaintainDatePicker" destination="zEg-eE-Anp" id="oCH-lC-VzQ"/>
                         <outlet property="machineNameLabel" destination="3C5-TB-ev0" id="mxM-uF-cSj"/>
                         <outlet property="machineNameTextField" destination="4hA-Lh-IM8" id="fva-bS-wpe"/>
                         <outlet property="machineQRNumberLabel" destination="lSw-Fr-iqe" id="SbL-Wk-aNi"/>
-                        <outlet property="machineQRNumberTextField" destination="OHP-9N-Vfg" id="TfD-uo-RF1"/>
+                        <outlet property="machineQRNumberTextField" destination="OHP-9N-Vfg" id="qZk-Ks-1f0"/>
                         <outlet property="machineTypeLabel" destination="0Yh-2h-NDs" id="pYt-Lh-bme"/>
-                        <outlet property="machineTypeTextField" destination="F5R-Up-ie9" id="BNd-f5-jr7"/>
+                        <outlet property="machineTypeTextField" destination="F5R-Up-ie9" id="HwW-kC-JjM"/>
+                        <outlet property="saveButton" destination="WN3-hq-p2u" id="sqb-nX-Jg4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
