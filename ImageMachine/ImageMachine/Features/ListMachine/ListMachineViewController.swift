@@ -27,6 +27,7 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var navigationView: UIView!
     
     var listMachine : [Machine] = []
+    var selectedMachineId : String = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,6 +74,7 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
             }
         }else if segue.identifier == "GoToDetail"{
             if let destVC = segue.destination as? DetailMachineViewController {
+                destVC.selectedIdMachine = self.selectedMachineId
                 
             }
         }
@@ -96,7 +98,13 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "GoToDetail", sender: self)
+        
+        if let id = listMachine[indexPath.row].id{
+            
+            self.selectedMachineId = id
+        }
+        
+            self.performSegue(withIdentifier: "GoToDetail", sender: self)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?

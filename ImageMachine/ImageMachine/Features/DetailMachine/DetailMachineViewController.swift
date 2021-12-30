@@ -48,6 +48,13 @@ class DetailMachineViewController : UIViewController{
     @IBOutlet weak var viewImageThumbnail: UIView!
     
     @IBOutlet weak var imageThumbnailCollectionView: UICollectionView!
+    
+    // MARK: Variable Pass
+    var selectedIdMachine : String = ""
+    
+    // MARK: Variable
+    var machineDetail : Machine!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
@@ -55,6 +62,11 @@ class DetailMachineViewController : UIViewController{
         setUIShadow(viewShadow: self.navigationView)
         setUIShadow(viewShadow: self.viewInformation)
         setRoundedCorner(viewCorner: self.viewInformation)
+        print("MASUK DETUAL PAGE : \(selectedIdMachine)")
+        if(selectedIdMachine != ""){
+            machineDetail = PersistanceManager.shared.getMachineById(id: selectedIdMachine)
+            print("MACHINE : \(machineDetail.id) :: \(machineDetail)")
+        }
     }
     
     func registerCell(){
