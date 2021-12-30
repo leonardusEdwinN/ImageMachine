@@ -9,12 +9,12 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="maintenanceDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="qrCodeNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="qrCodeNumber" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="machineImage" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="machineImage" inverseEntity="Image"/>
     </entity>
     <elements>
-        <element name="Machine" positionX="-54" positionY="-9" width="128" height="133"/>
         <element name="Image" positionX="405.6099853515625" positionY="-17.30221557617188" width="128" height="88"/>
+        <element name="Machine" positionX="-54" positionY="-9" width="128" height="119"/>
     </elements>
 </model>

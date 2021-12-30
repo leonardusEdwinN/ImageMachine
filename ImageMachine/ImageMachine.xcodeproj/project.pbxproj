@@ -29,6 +29,8 @@
 		138FB271277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */; };
 		138FB274277AE612007BDF2A /* DetailMachine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 138FB273277AE612007BDF2A /* DetailMachine.storyboard */; };
 		138FB276277AE621007BDF2A /* DetailMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138FB275277AE621007BDF2A /* DetailMachineViewController.swift */; };
+		13DBB915277D75CF001F6102 /* ImageThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DBB913277D75CF001F6102 /* ImageThumbnailCollectionViewCell.swift */; };
+		13DBB916277D75CF001F6102 /* ImageThumbnailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13DBB914277D75CF001F6102 /* ImageThumbnailCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		138FB26F277AE3B7007BDF2A /* MachineImageThumbnailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MachineImageThumbnailTableViewCell.xib; sourceTree = "<group>"; };
 		138FB273277AE612007BDF2A /* DetailMachine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailMachine.storyboard; sourceTree = "<group>"; };
 		138FB275277AE621007BDF2A /* DetailMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMachineViewController.swift; sourceTree = "<group>"; };
+		13DBB913277D75CF001F6102 /* ImageThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		13DBB914277D75CF001F6102 /* ImageThumbnailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageThumbnailCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 		133DC2BB277974570028EFC9 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				13DBB917277D7A4A001F6102 /* DetailMachineImage */,
 				138FB272277AE5FC007BDF2A /* DetailMachine */,
 				138FB268277ACA00007BDF2A /* Scanner */,
 				133DC2C12779898A0028EFC9 /* AddEditData */,
@@ -224,10 +229,27 @@
 		138FB272277AE5FC007BDF2A /* DetailMachine */ = {
 			isa = PBXGroup;
 			children = (
+				13DBB910277D7589001F6102 /* CustomCell */,
 				138FB273277AE612007BDF2A /* DetailMachine.storyboard */,
 				138FB275277AE621007BDF2A /* DetailMachineViewController.swift */,
 			);
 			path = DetailMachine;
+			sourceTree = "<group>";
+		};
+		13DBB910277D7589001F6102 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				13DBB913277D75CF001F6102 /* ImageThumbnailCollectionViewCell.swift */,
+				13DBB914277D75CF001F6102 /* ImageThumbnailCollectionViewCell.xib */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		13DBB917277D7A4A001F6102 /* DetailMachineImage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DetailMachineImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +364,7 @@
 				138FB26C277ACA5E007BDF2A /* QRScanner.storyboard in Resources */,
 				133DC2C02779752D0028EFC9 /* ListMachine.storyboard in Resources */,
 				138FB274277AE612007BDF2A /* DetailMachine.storyboard in Resources */,
+				13DBB916277D75CF001F6102 /* ImageThumbnailCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +399,7 @@
 				133DC2CB2779A22E0028EFC9 /* ListMachineTableViewCell.swift in Sources */,
 				138FB276277AE621007BDF2A /* DetailMachineViewController.swift in Sources */,
 				133DC2C5277989BC0028EFC9 /* AddEditDataViewController.swift in Sources */,
+				13DBB915277D75CF001F6102 /* ImageThumbnailCollectionViewCell.swift in Sources */,
 				133DC2882779640E0028EFC9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
