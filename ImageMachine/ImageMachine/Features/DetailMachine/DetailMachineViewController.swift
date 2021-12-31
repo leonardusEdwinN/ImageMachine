@@ -63,6 +63,7 @@ class DetailMachineViewController : UIViewController{
     @IBOutlet weak var machineMaintainDateValueLabel: UILabel!
     
     // MARK: UI Component Machine Image Thumbnail
+    @IBOutlet weak var emptyState: UIView!
     @IBOutlet weak var machineImageThumbnail: UILabel!
     
     @IBOutlet weak var viewImageThumbnail: UIView!
@@ -110,6 +111,16 @@ class DetailMachineViewController : UIViewController{
 //        }
     }
     
+    func checkState(){
+        if(imageThumbnail.count == 0){
+            emptyState.isHidden = false
+            imageThumbnailCollectionView.isHidden = true
+        }else{
+            emptyState.isHidden = true
+            imageThumbnailCollectionView.isHidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
@@ -125,7 +136,11 @@ class DetailMachineViewController : UIViewController{
         if(selectedIdMachine != ""){
             imageThumbnail = PersistanceManager.shared.getImageMachineThumbnailById(idMachine: selectedIdMachine)
         }
-        self.imageThumbnailCollectionView.reloadData()
+        DispatchQueue.main.async {
+            
+            self.imageThumbnailCollectionView.reloadData()
+            self.checkState()
+        }
     }
     
     func setData(){

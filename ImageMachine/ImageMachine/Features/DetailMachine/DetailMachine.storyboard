@@ -190,12 +190,42 @@
                                         </collectionViewFlowLayout>
                                         <cells/>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDG-Xa-oTX">
+                                        <rect key="frame" x="67" y="12.5" width="250" height="100"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Image Thumbnail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cK7-oo-V5J">
+                                                <rect key="frame" x="62.5" y="17" width="125" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.on.rectangle.angled" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="En7-wx-zjL">
+                                                <rect key="frame" x="100" y="37.5" width="50" height="50"/>
+                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="WnQ-K3-zU4"/>
+                                                    <constraint firstAttribute="height" constant="50" id="e2J-b6-s0d"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="En7-wx-zjL" firstAttribute="top" secondItem="cK7-oo-V5J" secondAttribute="bottom" constant="5" id="as7-iR-aWM"/>
+                                            <constraint firstAttribute="width" constant="250" id="bka-P5-4Kj"/>
+                                            <constraint firstItem="En7-wx-zjL" firstAttribute="centerX" secondItem="eDG-Xa-oTX" secondAttribute="centerX" id="cFY-vs-uJz"/>
+                                            <constraint firstItem="cK7-oo-V5J" firstAttribute="centerX" secondItem="eDG-Xa-oTX" secondAttribute="centerX" id="e11-Js-1I7"/>
+                                            <constraint firstItem="cK7-oo-V5J" firstAttribute="centerY" secondItem="eDG-Xa-oTX" secondAttribute="centerY" constant="-25" id="u8U-gz-7Gr"/>
+                                            <constraint firstAttribute="height" constant="100" id="wCS-4r-73a"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="eDG-Xa-oTX" firstAttribute="centerY" secondItem="RYG-Ue-Lo2" secondAttribute="centerY" id="7UH-75-W71"/>
                                     <constraint firstAttribute="bottom" secondItem="Cps-ha-aAP" secondAttribute="bottom" id="87R-XY-dtM"/>
                                     <constraint firstAttribute="height" constant="125" id="J3l-SF-KEY"/>
                                     <constraint firstItem="Cps-ha-aAP" firstAttribute="leading" secondItem="RYG-Ue-Lo2" secondAttribute="leading" id="Pws-JV-pb4"/>
+                                    <constraint firstItem="eDG-Xa-oTX" firstAttribute="centerX" secondItem="RYG-Ue-Lo2" secondAttribute="centerX" id="WLq-FS-s7K"/>
                                     <constraint firstItem="Cps-ha-aAP" firstAttribute="top" secondItem="RYG-Ue-Lo2" secondAttribute="top" id="emT-sc-Czo"/>
                                     <constraint firstAttribute="trailing" secondItem="Cps-ha-aAP" secondAttribute="trailing" id="j1i-6P-cc4"/>
                                 </constraints>
@@ -247,6 +277,7 @@
                         <outlet property="addImage" destination="P2f-3d-Sdb" id="YFg-D3-lxN"/>
                         <outlet property="backButton" destination="XxH-Jo-6wN" id="pZ4-D5-XJq"/>
                         <outlet property="editButton" destination="HGW-V6-as9" id="sry-QW-ldF"/>
+                        <outlet property="emptyState" destination="eDG-Xa-oTX" id="7Pp-Xy-lnf"/>
                         <outlet property="imageThumbnailCollectionView" destination="Cps-ha-aAP" id="qyR-5o-bTP"/>
                         <outlet property="machineIdLabel" destination="QjW-vV-77a" id="Gug-Of-bxR"/>
                         <outlet property="machineIdValueLabel" destination="jm2-5j-D9o" id="SFS-ui-g1Y"/>
@@ -295,7 +326,11 @@
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="photo.on.rectangle.angled" catalog="system" width="128" height="100"/>
         <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
