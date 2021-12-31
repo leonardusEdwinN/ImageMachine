@@ -55,11 +55,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Could not load persistent stores \(error), \(error.userInfo)")
+//                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
     }()
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application's managed object context before the application terminates.
+    self.saveContext()
+    }
 
     // MARK: - Core Data Saving support
 
