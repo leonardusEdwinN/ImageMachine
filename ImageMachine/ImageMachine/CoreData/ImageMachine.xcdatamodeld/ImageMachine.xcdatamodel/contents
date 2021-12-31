@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Image" representedClassName="Image" syncable="YES" codeGenerationType="class">
+    <entity name="ImageEntity" representedClassName="ImageEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
-        <relationship name="machineImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Machine" inverseName="machineImage" inverseEntity="Machine"/>
+        <relationship name="machineImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MachineEntity" inverseName="machineImage" inverseEntity="MachineEntity"/>
     </entity>
-    <entity name="Machine" representedClassName="Machine" syncable="YES" codeGenerationType="class">
+    <entity name="MachineEntity" representedClassName="MachineEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="maintenanceDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="qrCodeNumber" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="machineImage" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="machineImage" inverseEntity="Image"/>
+        <relationship name="machineImage" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImageEntity" inverseName="machineImage" inverseEntity="ImageEntity"/>
     </entity>
     <elements>
-        <element name="Image" positionX="405.6099853515625" positionY="-17.30221557617188" width="128" height="88"/>
-        <element name="Machine" positionX="-54" positionY="-9" width="128" height="119"/>
+        <element name="ImageEntity" positionX="405.6099853515625" positionY="-17.30221557617188" width="128" height="74"/>
+        <element name="MachineEntity" positionX="-54" positionY="-9" width="128" height="119"/>
     </elements>
 </model>
