@@ -8,10 +8,15 @@
 import AVFoundation
 import UIKit
 
+
+protocol GetDataAndGoToDetailDelegate{
+    func getDataAndPerformSegueToDetail(qrNumber : String)
+}
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var backButton: UIButton!
+    var delegate : GetDataAndGoToDetailDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,12 +60,19 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         backButton = UIButton(frame: CGRect(x: 15, y: 30, width: 100, height: 40))
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         backButton.setTitle("Back", for: .normal)
+        backButton.addTarget(self, action: #selector(closeButtonPressed(sender:)), for: .touchUpInside)
         view.addSubview(backButton)
         
         
 
         captureSession.startRunning()
     }
+    
+    
+    @objc func closeButtonPressed(sender: UIButton!) {
+           self.dismiss(animated: true, completion: nil)
+           
+       }
 
     func failed() {
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
@@ -96,10 +108,13 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         }
 
         dismiss(animated: true)
+       
     }
 
     func found(code: String) {
-        print(code)
+        self.dismiss(animated: true) {
+            self.delegate?.getDataAndPerformSegueToDetail(qrNumber: code)
+        }
     }
 
     override var prefersStatusBarHidden: Bool {

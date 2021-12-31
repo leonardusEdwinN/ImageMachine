@@ -25,13 +25,15 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var listMachinveTableView: UITableView!
     @IBOutlet weak var navigationView: UIView!
+    @IBOutlet weak var emptyState: UIView!
     
-    var listMachine : [Machine] = []
+    var listMachine : [MachineEntity] = []
     var selectedMachineId : String = ""
+    var selectedMachine : MachineEntity!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getDataListMachine()
+        getDataListMachine(sortedBy: "name")
     }
     
     override func viewDidLoad() {
@@ -39,7 +41,31 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
         registerCell()
         setUINavigation()
         setTitleButton()
+        checkState()
+//        whereIsMySQLite()
     }
+    
+    func checkState(){
+        if(listMachine.count == 0){
+            emptyState.isHidden = false
+            listMachinveTableView.isHidden = true
+        }else{
+            emptyState.isHidden = true
+            listMachinveTableView.isHidden = false
+        }
+    }
+    
+//    func whereIsMySQLite() {
+//        let path = FileManager
+//            .default
+//            .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+//            .last?
+//            .absoluteString
+//            .replacingOccurrences(of: "file://", with: "")
+//            .removingPercentEncoding
+//
+//        print(path ?? "Not found")
+//    }
     
     func registerCell(){
         
@@ -54,8 +80,13 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
         moreButton.setTitle("", for: .normal)
     }
     
-    func getDataListMachine(){
-        listMachine = PersistanceManager.shared.getListMachines()
+    func getDataListMachine(sortedBy : String){
+        
+        listMachine = PersistanceManager.shared.getListMachines(sortBy: sortedBy)
+        DispatchQueue.main.async {
+            self.listMachinveTableView.reloadData()
+            self.checkState()
+        }
     }
     
     func setUINavigation(){
@@ -66,15 +97,30 @@ class ListMachineViewController: UIViewController, UIImagePickerControllerDelega
         navigationView.layer.shadowOpacity = 5
     }
     
+    func setAscending(){
+        
+    }
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToQRScanner"{
             if let destVC = segue.destination as? QRScannerViewController {
 
                 destVC.modalPresentationStyle = .fullScreen
+                destVC.delegate = self
             }
         }else if segue.identifier == "GoToDetail"{
             if let destVC = segue.destination as? DetailMachineViewController {
                 destVC.selectedIdMachine = self.selectedMachineId
+                destVC.machineDetail = self.selectedMachine
+                destVC.delegate = self
+                
+            }
+        }else if segue.identifier == "GoToAddDataPage"{
+            if let destVC = segue.destination as? AddEditDataViewController {
+                destVC.machineData = self.selectedMachine
+                destVC.delegate = self
                 
             }
         }
@@ -92,7 +138,7 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
         
         
         
-        cell.setUI(title: listMachine[indexPath.row].name ?? "")
+        cell.setUI(title: listMachine[indexPath.row].name ?? "", type: listMachine[indexPath.row].type ?? "")
         
         return cell
     }
@@ -102,9 +148,13 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
         if let id = listMachine[indexPath.row].id{
             
             self.selectedMachineId = id
+            self.selectedMachine = listMachine[indexPath.row]
         }
         
             self.performSegue(withIdentifier: "GoToDetail", sender: self)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
@@ -113,20 +163,19 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
         let delete = UIContextualAction(style: .normal,
                                          title: "Delete") { [weak self] (action, view, completionHandler) in
 
-//            if let deletedRemindner = self?.reminders[indexPath.row]{
-//                //update data status
-//                PersistanceManager.shared.deleteReminder(reminder: deletedRemindner)
-//            }
+            if let deletedMachine = self?.listMachine[indexPath.row]{
+                //update data status
+                PersistanceManager.shared.deleteMachine(machine: deletedMachine)
+            }
 
-            print("DELETE DATA UHUY")
-//            self?.fetchDataReminder()
-//
-//            self?.timerReminderTableView.reloadData()
+            DispatchQueue.main.async {
+                self?.getDataListMachine(sortedBy: "name")
+            }
             completionHandler(true)
         }
         
         delete.image = UIImage(systemName: "trash")?.withTintColor(.white)
-        delete.backgroundColor = .red
+        delete.backgroundColor = UIColor(named: "DeleteColor")
         
         
         let configuration = UISwipeActionsConfiguration(actions: [delete])
@@ -138,21 +187,15 @@ extension ListMachineViewController: UITableViewDelegate, UITableViewDataSource{
         
         let edit = UIContextualAction(style: .normal,
                                          title: "Edit") { [weak self] (action, view, completionHandler) in
-
-//            if let deletedRemindner = self?.reminders[indexPath.row]{
-//                //update data status
-//                PersistanceManager.shared.deleteReminder(reminder: deletedRemindner)
-//            }
-
-            print("Edit DATA UHUY")
-//            self?.fetchDataReminder()
-//
-//            self?.timerReminderTableView.reloadData()
+            
+            self?.selectedMachine = self?.listMachine[indexPath.row]
+            self?.performSegue(withIdentifier: "GoToAddDataPage", sender: self)
+            
             completionHandler(true)
         }
         
         edit.image = UIImage(systemName: "pencil")?.withTintColor(.white)
-        edit.backgroundColor = .green
+        edit.backgroundColor = UIColor(named: "EditColor")
         
         
         
@@ -172,6 +215,8 @@ extension ListMachineViewController{
         
         //button 1
         let addDatamachine = UIAlertAction(title: "Add Data Machine", style: .default){ (action: UIAlertAction) in
+            
+            self.selectedMachine = nil
             
             self.performSegue(withIdentifier: "GoToAddDataPage", sender: self)
         }
@@ -198,10 +243,12 @@ extension ListMachineViewController{
         
         //button 1
         let sortByMachineName = UIAlertAction(title: "Machine Name", style: .default){ (action: UIAlertAction) in
+            self.getDataListMachine(sortedBy: "name")
         }
         
         //button camera
         let sortByMachineType = UIAlertAction(title: "Machine Type", style: .default){ (action: UIAlertAction) in
+            self.getDataListMachine(sortedBy: "type")
         }
         
         //button 3
@@ -212,5 +259,26 @@ extension ListMachineViewController{
         actionSheet.addAction(cancel)
         
         present(actionSheet, animated: true, completion: nil)
+    }
+}
+
+extension ListMachineViewController : ReloadDataListMachineDelegate{
+    func reloadDataAfterEditOrAdd() {
+        DispatchQueue.main.async {
+            self.getDataListMachine(sortedBy: "name")
+        }
+    }
+}
+extension ListMachineViewController : GetDataAndGoToDetailDelegate{
+    func getDataAndPerformSegueToDetail(qrNumber : String) {
+        let selectedMachine = PersistanceManager.shared.getMachineByQRCode(qrCodeNumber: qrNumber)
+        
+        if let id = selectedMachine.id{
+            
+            self.selectedMachineId = id
+            self.selectedMachine = selectedMachine
+        }
+        
+            self.performSegue(withIdentifier: "GoToDetail", sender: self)
     }
 }
