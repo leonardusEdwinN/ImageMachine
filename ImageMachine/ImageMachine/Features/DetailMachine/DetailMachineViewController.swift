@@ -20,7 +20,6 @@ class DetailMachineViewController : UIViewController{
     var imageThumbnail : [ImageEntity] = []
     var listImageSelected : [String] = []
     var delegate : ReloadDataListMachineDelegate?
-//    private var imagePickerControler =  UIImagePickerController()
     let imagePicker = ImagePickerController()
     var selectedImageFullScreen : String = ""
     

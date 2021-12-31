@@ -277,8 +277,9 @@ extension ListMachineViewController : GetDataAndGoToDetailDelegate{
             
             self.selectedMachineId = id
             self.selectedMachine = selectedMachine
+            
+            self.performSegue(withIdentifier: "GoToDetail", sender: self)
         }
         
-            self.performSegue(withIdentifier: "GoToDetail", sender: self)
     }
 }

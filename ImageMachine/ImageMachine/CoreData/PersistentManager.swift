@@ -64,30 +64,31 @@ class PersistanceManager {
         let request: NSFetchRequest<MachineEntity> = MachineEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", id)
         
-        var machine: MachineEntity!
+        var machine: MachineEntity?
         
         do {
             machine =  try persistentContainer.viewContext.fetch(request).first
         } catch {
-            print("Error fetching authors")
+            print("Error fetching machine")
         }
         
-        return machine
+        return machine ?? MachineEntity()
     }
     
     func getMachineByQRCode(qrCodeNumber: String) -> MachineEntity {
         let request: NSFetchRequest<MachineEntity> = MachineEntity.fetchRequest()
         request.predicate = NSPredicate(format: "qrCodeNumber = %@", qrCodeNumber)
         
-        var machine: MachineEntity!
+        var machine: MachineEntity?
         
         do {
             machine =  try persistentContainer.viewContext.fetch(request).first
-        } catch {
-            print("Error fetching authors")
+            print("machine : \(machine)")
+        } catch let error as NSError {
+            print("Error :: \(error)")
         }
         
-        return machine
+        return machine ?? MachineEntity()
     }
     
     func updateMachineById(idMachine: String, name: String, type:String, QRNumber: String, lastMaintain : Date){
