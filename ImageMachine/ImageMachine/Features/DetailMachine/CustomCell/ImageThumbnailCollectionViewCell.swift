@@ -8,7 +8,7 @@
 import UIKit
 
 class ImageThumbnailCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var viewImageThumbnail: UIView!
     @IBOutlet weak var machineImage: UIImageView!
     override func awakeFromNib() {
@@ -21,16 +21,17 @@ class ImageThumbnailCollectionViewCell: UICollectionViewCell {
     }
     
     func setUI(){
-        viewImageThumbnail.backgroundColor = UIColor.white
-        viewImageThumbnail.layer.shadowColor = UIColor.gray.cgColor
-        viewImageThumbnail.layer.shadowOffset = CGSize(width: 1, height: 1)
-        viewImageThumbnail.layer.shadowRadius = 1
-        viewImageThumbnail.layer.shadowOpacity = 5
         viewImageThumbnail.layer.cornerRadius = 15
+        viewImageThumbnail.layer.borderWidth = 2
+        viewImageThumbnail.layer.borderColor = UIColor.black.cgColor
     }
     
-    func setImage(image: String){
+    func setImage(imageStr: String){
+        guard let decodedData = Data(base64Encoded: imageStr, options: .ignoreUnknownCharacters) else { return  }
+        let decodedimage: UIImage = UIImage(data: decodedData) ?? UIImage(systemName: "camera")!
         
+        machineImage.contentMode = .scaleToFill
+        machineImage.image = decodedimage
     }
-
+    
 }
