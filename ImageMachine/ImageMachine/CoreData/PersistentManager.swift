@@ -29,7 +29,7 @@ class PersistanceManager {
     }
     
     func setDataMachine(name: String, type:String, QRNumber: String, lastMaintain : Date) {
-        let machine = Machine(context: persistentContainer.viewContext)
+        let machine = MachineEntity(context: persistentContainer.viewContext)
         machine.id = "\(UUID())"
         machine.name = name
         machine.type = type
@@ -38,30 +38,33 @@ class PersistanceManager {
         save()
     }
     
-    func getListMachines() -> [Machine] {
-        let request: NSFetchRequest<Machine> = Machine.fetchRequest()
+    func getListMachines(sortBy: String) -> [MachineEntity] {
+        let request: NSFetchRequest<MachineEntity> = MachineEntity.fetchRequest()
+        let sort = NSSortDescriptor(key: "\(sortBy)", ascending: true)
         
-        var listMachines: [Machine] = []
+        request.sortDescriptors = [sort]
+        
+        var listMachines: [MachineEntity] = []
         
         do {
             listMachines = try persistentContainer.viewContext.fetch(request)
         } catch {
             print("Error fetching authors")
         }
-        
         return listMachines
     }
     
-    func deleteMachine(machine : Machine) {
+    
+    func deleteMachine(machine : MachineEntity) {
         persistentContainer.viewContext.delete(machine)
         save()
     }
     
-    func getMachineById(id: String) -> Machine {
-        let request: NSFetchRequest<Machine> = Machine.fetchRequest()
+    func getMachineById(id: String) -> MachineEntity {
+        let request: NSFetchRequest<MachineEntity> = MachineEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id = %@", id)
         
-        var machine: Machine!
+        var machine: MachineEntity!
         
         do {
             machine =  try persistentContainer.viewContext.fetch(request).first
@@ -70,6 +73,90 @@ class PersistanceManager {
         }
         
         return machine
+    }
+    
+    func getMachineByQRCode(qrCodeNumber: String) -> MachineEntity {
+        let request: NSFetchRequest<MachineEntity> = MachineEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "qrCodeNumber = %@", qrCodeNumber)
+        
+        var machine: MachineEntity!
+        
+        do {
+            machine =  try persistentContainer.viewContext.fetch(request).first
+        } catch {
+            print("Error fetching authors")
+        }
+        
+        return machine
+    }
+    
+    func updateMachineById(idMachine: String, name: String, type:String, QRNumber: String, lastMaintain : Date){
+        // 1. fetch data
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MachineEntity")
+        
+        // 2. set predicate (condition)
+        fetchRequest.predicate = NSPredicate(format: "id = %@", idMachine)
+        
+        print("FETCH REQUEST : \(fetchRequest) : \(idMachine)")
+        // 3. execute update
+        do {
+            print("PREPARE UPDATE DATA")
+            let objects = try context.fetch(fetchRequest)
+            let objectToBeUpdated = objects[0] as!NSManagedObject
+            objectToBeUpdated.setValue(name, forKey: "name")
+            objectToBeUpdated.setValue(type, forKey: "type")
+            objectToBeUpdated.setValue(QRNumber, forKey: "qrCodeNumber")
+            objectToBeUpdated.setValue(lastMaintain, forKey: "maintenanceDate")
+        } catch {
+            // do something if error
+        }
+        
+        // 4. save
+        do {
+            try
+            context.save()
+            
+            print("DATA SAVED")
+        } catch let error as NSError {
+            // do something if error...
+            print("ERROR UPDATE DATA :\(error)")
+        }
+    }
+    
+    
+    
+    
+    
+    func getImageMachineThumbnailById(idMachine: String) -> [ImageEntity] {
+        let request: NSFetchRequest<ImageEntity> = ImageEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "machineImage.id = %@", idMachine)
+        
+        var imageThumbnail: [ImageEntity] = []
+        
+        do {
+            imageThumbnail =  try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print("Error fetching authors")
+        }
+        
+        return imageThumbnail
+    }
+    
+    //cobain satuan dulu
+    func addMachineImage(machine : MachineEntity, imageString: String) {
+//        let machineData : MachineEntity = getMachineById(id: idMachine)
+        print("MACHINE DATA : \(machine)")
+        //masukin
+        let image = ImageEntity(context: persistentContainer.viewContext)
+        image.id = "\(UUID())"
+        image.image = imageString
+        image.machineImage = machine
+        save()
+    }
+    
+    func deleteMachineImageThumbanail(image : ImageEntity) {
+        persistentContainer.viewContext.delete(image)
+        save()
     }
     
     
