@@ -37,43 +37,55 @@ class AddEditDataViewController: UIViewController{
     
     @IBOutlet weak var saveButton: UIButton!
     @IBAction func saveButtonPressed(_ sender: Any) {
+        DispatchQueue.main.async {
+            LoadingScreen.sharedInstance.showIndicator()
+        }
         
         if(isEdit){
             //melakukan update data
-            if let machineId = machineData.id{
+            if let machineId = self.machineViewModel?.item.id{
                 //bisa melakukan update
-                PersistanceManager.shared.updateMachineById(idMachine: machineId, name: machineNameTextField.text ?? "", type: machineTypeTextField.text ?? "", QRNumber: machineQRNumberTextField.text ?? "1", lastMaintain: machineLastMaintainDatePicker.date )
+                machineViewModel?.updateDataMachine(id: machineId, name: machineNameTextField.text ?? "", type: machineTypeTextField.text ?? "", qrNumber: machineQRNumberTextField.text ?? "1", maintenanceDate: machineLastMaintainDatePicker.date, completion: {
+                    
+                    DispatchQueue.main.async {
+                        LoadingScreen.sharedInstance.hideIndicator()
+                    }
+                    
+                    self.view.window!.rootViewController?.dismiss(animated: false,completion: {
+                            self.delegate?.reloadDataAfterEditOrAdd()
+
+                    })
+                })
+                
             }
             
             
         }else{
-            PersistanceManager.shared.setDataMachine(name: machineNameTextField.text ?? "", type: machineTypeTextField.text ?? "", QRNumber: machineQRNumberTextField.text ?? "1", lastMaintain: machineLastMaintainDatePicker.date)
+            machineViewModel?.setNewDataMachine(name: machineNameTextField.text ?? "", type: machineTypeTextField.text ?? "", qrNumber: machineQRNumberTextField.text ?? "1", maintenanceDate: machineLastMaintainDatePicker.date, completion: {
+                DispatchQueue.main.async {
+                    LoadingScreen.sharedInstance.hideIndicator()
+                }
+                
+                self.view.window!.rootViewController?.dismiss(animated: false,completion: {
+                        self.delegate?.reloadDataAfterEditOrAdd()
+
+                })
+            })
+            
             
             
         }
         
-        
-//        self.dismiss(animated: false, completion: {
-//            self.delegate?.reloadDataAfterEditOrAdd()
-//        })
-        
-        self.view.window!.rootViewController?.dismiss(animated: false,completion: {
-
-                self.delegate?.reloadDataAfterEditOrAdd()
-
-        })
-        
-        
+       
     }
     
     // MARK: Variable Pass
-    var machineData : MachineEntity!
+    var machineViewModel : MachineViewModel?
     
     // MARK: Variable
     var isEdit : Bool = false
     var delegate : ReloadDataListMachineDelegate?
-    var machineImageThumbnail : [ImageEntity] = []
-    
+    var listImageThumbnailViewModel = ListImageThumbnailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +96,7 @@ class AddEditDataViewController: UIViewController{
     }
     
     func checkState(){
-        if(machineImageThumbnail.count == 0){
+        if(listImageThumbnailViewModel.numberOfRows(0) == 0){
             emptyState.isHidden = false
             machineImageThumbnailTableView.isHidden = true
         }else{
@@ -94,16 +106,15 @@ class AddEditDataViewController: UIViewController{
     }
     
     func setUI(){
-        if(machineData != nil){
-            //ada data
-            self.isEdit = true
-            machineNameTextField.text = machineData.name
-            machineTypeTextField.text = machineData.type
-            machineQRNumberTextField.text = machineData.qrCodeNumber
-            machineLastMaintainDatePicker.date = machineData.maintenanceDate ?? Date()
+        if(self.isEdit){
+            //ada data,is edit true
+            machineNameTextField.text = machineViewModel?.item.name
+            machineTypeTextField.text = machineViewModel?.item.type
+            machineQRNumberTextField.text = machineViewModel?.item.qrCodeNumber
+            machineLastMaintainDatePicker.date = machineViewModel?.item.maintenanceDate ?? Date()
             getListImage() //ambil data imagenya
         }else{
-            self.isEdit = false
+            //is edit false
             machineNameTextField.text = ""
             machineTypeTextField.text = ""
             machineQRNumberTextField.text = ""
@@ -134,22 +145,29 @@ class AddEditDataViewController: UIViewController{
     }
     
     func getListImage(){
-        if let id = self.machineData.id{
-            machineImageThumbnail = PersistanceManager.shared.getImageMachineThumbnailById(idMachine: id)
-        }
         DispatchQueue.main.async {
-            self.machineImageThumbnailTableView.reloadData()
-            self.checkState()
+            LoadingScreen.sharedInstance.showIndicator()
         }
+        
+        if let id = self.machineViewModel?.item.id{
+            listImageThumbnailViewModel.getListThumbnailByMachine(byId: id, completion: { ListImageThumbnailVM in
+                DispatchQueue.main.async {
+                    LoadingScreen.sharedInstance.hideIndicator()
+                    self.machineImageThumbnailTableView.reloadData()
+                    self.checkState()
+                }
+            })
+        }
+        
     }
 }
 
 extension AddEditDataViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var cellCount: Int = 0
-        if(self.machineData != nil){
+        if(self.machineViewModel?.item != nil){
             //ada data
-            cellCount = machineImageThumbnail.count
+            cellCount = listImageThumbnailViewModel.numberOfRows(section)
             
         }else{
             cellCount = 0
@@ -161,7 +179,8 @@ extension AddEditDataViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "machineImageThumbnailTableViewCell", for: indexPath) as! MachineImageThumbnailTableViewCell
         
-        row.setImageName(title: machineImageThumbnail[indexPath.row].image ?? "")
+        let imageThumbnails = self.listImageThumbnailViewModel.modelAt(indexPath.row).item
+        row.setImageName(title: imageThumbnails.image ?? "")
         
         return row
     }
@@ -175,14 +194,16 @@ extension AddEditDataViewController : UITableViewDelegate, UITableViewDataSource
         let delete = UIContextualAction(style: .normal,
                                          title: "Delete") { [weak self] (action, view, completionHandler) in
 
-            if let deletedImagethumbnail = self?.machineImageThumbnail[indexPath.row]{
+            if let deletedImagethumbnailVM = self?.listImageThumbnailViewModel.modelAt(indexPath.row){
                 //update data status
-                PersistanceManager.shared.deleteMachineImageThumbanail(image: deletedImagethumbnail)
+                deletedImagethumbnailVM.deleteImage(image: deletedImagethumbnailVM.item) {
+                    DispatchQueue.main.async {
+                        self?.getListImage()
+                    }
+                }
             }
 
-            DispatchQueue.main.async {
-                self?.getListImage()
-            }
+            
             completionHandler(true)
         }
         
