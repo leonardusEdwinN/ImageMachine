@@ -24,6 +24,8 @@ class ImageThumbnailCollectionViewCell: UICollectionViewCell {
         viewImageThumbnail.layer.cornerRadius = 15
         viewImageThumbnail.layer.borderWidth = 2
         viewImageThumbnail.layer.borderColor = UIColor.black.cgColor
+        
+        machineImage.layer.cornerRadius = 15
     }
     
     func setImage(imageStr: String){

@@ -13,15 +13,13 @@ import Photos
 class DetailMachineViewController : UIViewController{
     
     // MARK: Variable Pass
-    var selectedIdMachine : String = ""
-    var machineDetail : MachineEntity!
+    var machineVM : MachineViewModel?
     
     // MARK: Variable
-    var imageThumbnail : [ImageEntity] = []
-    var listImageSelected : [String] = []
     var delegate : ReloadDataListMachineDelegate?
     let imagePicker = ImagePickerController()
     var selectedImageFullScreen : String = ""
+    var listImageThumbnailVM = ListImageThumbnailViewModel()
     
 
     // MARK: UI Component Navigation
@@ -39,10 +37,19 @@ class DetailMachineViewController : UIViewController{
     
     @IBOutlet weak var trashButton: UIButton!
     @IBAction func trashButtonPressed(_ sender: Any) {
-        PersistanceManager.shared.deleteMachine(machine: machineDetail)
-        self.dismiss(animated: false) { [self] in
-            delegate?.reloadDataAfterEditOrAdd()
+        DispatchQueue.main.async {
+            LoadingScreen.sharedInstance.showIndicator()
         }
+        
+        machineVM?.deleteMachine(machine: machineVM!.item) {
+            self.dismiss(animated: false) { [self] in
+                DispatchQueue.main.async {
+                    LoadingScreen.sharedInstance.hideIndicator()
+                }
+                delegate?.reloadDataAfterEditOrAdd()
+            }
+        }
+       
     }
     
     // MARK: UI Component Machine Information
@@ -71,6 +78,11 @@ class DetailMachineViewController : UIViewController{
     
     @IBOutlet weak var addImage: UIButton!
     @IBAction func addImagePressed(_ sender: Any) {
+        
+        DispatchQueue.main.async {
+            LoadingScreen.sharedInstance.showIndicator()
+        }
+        
         presentImagePicker(imagePicker, select: { (asset) in
             // User selected an asset. Do something with it. Perhaps begin processing/upload?
         }, deselect: { (asset) in
@@ -88,30 +100,24 @@ class DetailMachineViewController : UIViewController{
                 let imageData:Data = assetThumbnail.pngData()!
                 imgStrBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
                 
-                if let machineData = self.machineDetail{
-                    PersistanceManager.shared.addMachineImage(machine: machineData, imageString: imgStrBase64)
+                //add machine image
+                self.machineVM?.addMachineImage(machineData: self.machineVM!.item, imgStr: imgStrBase64) {
+                    self.getImageThumbnail()
                 }
                 
             }
             
-            self.getImageThumbnail()
+            
+            DispatchQueue.main.async {
+                LoadingScreen.sharedInstance.hideIndicator()
+            }
+            
             
         })
-        
-        // MARK: SELECT SINGLE IMAGE
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-//            self.imagePickerControler.sourceType = .photoLibrary
-//            self.imagePickerControler.delegate = self
-//            self.imagePickerControler.allowsEditing = false
-//
-//            self.present(self.imagePickerControler, animated: true, completion: nil)
-//        }else{
-//            fatalError("Photo library not avaliable")
-//        }
     }
     
     func checkState(){
-        if(imageThumbnail.count == 0){
+        if(listImageThumbnailVM.numberOfRows(0) == 0){
             emptyState.isHidden = false
             imageThumbnailCollectionView.isHidden = true
         }else{
@@ -125,33 +131,43 @@ class DetailMachineViewController : UIViewController{
         registerCell()
         setTitleButton()
         setUIShadow(viewShadow: self.navigationView)
-        if(machineDetail != nil){
+        if(self.machineVM?.item != nil){
             setData()
         }
         getImageThumbnail()
     }
     
     func getImageThumbnail(){
-        if(selectedIdMachine != ""){
-            imageThumbnail = PersistanceManager.shared.getImageMachineThumbnailById(idMachine: selectedIdMachine)
-        }
+        
         DispatchQueue.main.async {
-            
-            self.imageThumbnailCollectionView.reloadData()
-            self.checkState()
+            LoadingScreen.sharedInstance.showIndicator()
         }
+        
+        if let id = self.machineVM?.item.id {
+            listImageThumbnailVM.getListThumbnailByMachine(byId: id) { ImageThumbnailViewModel in
+                DispatchQueue.main.async {
+                
+                    LoadingScreen.sharedInstance.hideIndicator()
+                    self.imageThumbnailCollectionView.reloadData()
+                    self.checkState()
+                }
+            }
+        }
+        
+        
+        
     }
     
     func setData(){
-        machineNameValueLabel.text = self.machineDetail.name
-        machineTypeValueLabel.text = self.machineDetail.type
-        machineIdValueLabel.text = self.machineDetail.id
+        machineNameValueLabel.text = self.machineVM?.item.name
+        machineTypeValueLabel.text = self.machineVM?.item.type
+        machineIdValueLabel.text = self.machineVM?.item.id
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ssZ"
         dateFormatter.timeZone = TimeZone(abbreviation: "WIB")
         
-        let strDate = dateFormatter.string(from: self.machineDetail.maintenanceDate ?? Date())
+        let strDate = dateFormatter.string(from: self.machineVM?.item.maintenanceDate ?? Date())
         machineMaintainDateValueLabel.text = strDate
     }
     
@@ -189,8 +205,9 @@ class DetailMachineViewController : UIViewController{
             }
         }else  if segue.identifier == "GoToAddDataPage"{
             if let destVC = segue.destination as? AddEditDataViewController {
-                destVC.machineData = self.machineDetail
+                destVC.machineViewModel = self.machineVM
                 destVC.delegate = self
+                destVC.isEdit = true
                 
             }
         }
@@ -212,21 +229,21 @@ class DetailMachineViewController : UIViewController{
 
 extension DetailMachineViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageThumbnail.count
+        return listImageThumbnailVM.numberOfRows(section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageThumbnailCollectionViewCell", for: indexPath) as! ImageThumbnailCollectionViewCell
         
-        
-        cell.setImage(imageStr: imageThumbnail[indexPath.row].image ?? "")
+        let imageThumbnail = listImageThumbnailVM.modelAt(indexPath.row)
+        cell.setImage(imageStr: imageThumbnail.item.image ?? "")
         
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedImageFullScreen = imageThumbnail[indexPath.row].image ?? ""
+        self.selectedImageFullScreen = listImageThumbnailVM.modelAt(indexPath.row).item.image ?? ""
         self.performSegue(withIdentifier: "GoToImageFullscreen", sender: self)
     }
     
@@ -262,7 +279,3 @@ extension DetailMachineViewController : ReloadDataListMachineDelegate{
     
     
 }
-
-//extension DetailMachineViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-//
-//}

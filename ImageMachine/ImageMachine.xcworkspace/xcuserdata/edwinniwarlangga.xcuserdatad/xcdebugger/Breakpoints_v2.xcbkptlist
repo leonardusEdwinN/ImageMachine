@@ -14,8 +14,8 @@
             filePath = "ImageMachine/CoreData/PersistentManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "addMachineImage(machine:imageString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -23,16 +23,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F1E588B8-7801-45D4-9621-D1F1A91DFF53"
+            uuid = "F54DCF88-71ED-44CD-985D-D4DE0451950A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ImageMachine/CoreData/PersistentManager.swift"
+            filePath = "ImageMachine/Features/AddEditData/Controller/AddEditDataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "getMachineByQRCode(qrCodeNumber:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "saveButtonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E54783A7-0EF5-4AF6-8DAC-05E833A8532B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageMachine/Features/ListMachine/ViewModel/ListMachineViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "setNewDataMachine(name:type:qrNumber:maintenanceDate:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2022D5FC-99DD-4B40-81AC-589F42FAC565"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageMachine/Features/ListMachine/ViewModel/ListMachineViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "getListMachine(sortBy:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
